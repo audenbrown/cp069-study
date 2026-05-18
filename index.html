@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Read a short organizational decision summary and answer questions</title>
+  <!-- Hosting choice: this file lives at decabox-ai/docs/cp069_study.html so GitHub Pages can use the existing decabox-ai/docs convention. -->
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #5b6577;
+      --line: #dbe2ee;
+      --accent: #2457d6;
+      --accent-dark: #173f9e;
+      --danger: #b42318;
+      --success: #067647;
+      --shadow: 0 18px 40px rgba(23, 32, 51, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #eef3ff, var(--bg) 48%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    main {
+      width: min(760px, calc(100% - 32px));
+      margin: 32px auto 48px;
+    }
+    .hero {
+      margin-bottom: 18px;
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.2;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(219, 226, 238, 0.9);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 4vw, 28px);
+      margin-bottom: 18px;
+    }
+    .muted { color: var(--muted); }
+    .packet h2 {
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .packet h2:first-of-type { margin-top: 0; }
+    .question {
+      padding-top: 18px;
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .question:first-child {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: 0;
+    }
+    .prompt {
+      font-weight: 650;
+      margin-bottom: 12px;
+    }
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+    label.option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      margin-top: 10px;
+      background: #fbfcff;
+      cursor: pointer;
+    }
+    input[type="radio"] { margin-top: 4px; }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: inherit;
+      color: inherit;
+      background: #fbfcff;
+    }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 20px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 22px;
+    }
+    button:hover { background: var(--accent-dark); }
+    button:disabled {
+      opacity: 0.68;
+      cursor: wait;
+    }
+    .status {
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .error {
+      color: var(--danger);
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+    .success {
+      color: var(--success);
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+    }
+    [hidden] { display: none !important; }
+    @media (max-width: 520px) {
+      main { width: min(100% - 20px, 760px); margin-top: 18px; }
+      .card { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Short reading task</p>
+      <h1>Read a short organizational decision summary and answer questions</h1>
+    </section>
+
+    <div id="loading" class="card muted">Loading your study page...</div>
+    <div id="error" class="status error" hidden></div>
+
+    <section id="packet" class="card packet" hidden aria-live="polite"></section>
+
+    <form id="questions" class="card" hidden>
+      <div class="question">
+        <div class="prompt">To show that you are reading the instructions, please select <strong>Option C</strong> below.</div>
+        <fieldset>
+          <label class="option"><input required type="radio" name="attention_check" value="A"> <span>Option A</span></label>
+          <label class="option"><input type="radio" name="attention_check" value="B"> <span>Option B</span></label>
+          <label class="option"><input type="radio" name="attention_check" value="C"> <span>Option C</span></label>
+          <label class="option"><input type="radio" name="attention_check" value="D"> <span>Option D</span></label>
+        </fieldset>
+      </div>
+
+      <div class="question">
+        <div class="prompt">Q1. What did the organization decide to create?</div>
+        <fieldset>
+          <label class="option"><input required type="radio" name="q1" value="A"> <span>A. A standing advisory AI with no final voting authority</span></label>
+          <label class="option"><input type="radio" name="q1" value="B"> <span>B. A new trading desk</span></label>
+          <label class="option"><input type="radio" name="q1" value="C"> <span>C. A public customer-support chatbot</span></label>
+          <label class="option"><input type="radio" name="q1" value="D"> <span>D. A compliance-review committee</span></label>
+        </fieldset>
+      </div>
+
+      <div class="question">
+        <div class="prompt">Q2. After the decision, what status applied to the new system?</div>
+        <fieldset>
+          <label class="option"><input required type="radio" name="q2" value="A"> <span>A. Rejected permanently</span></label>
+          <label class="option"><input type="radio" name="q2" value="B"> <span>B. Approved in principle but still gated by further implementation work</span></label>
+          <label class="option"><input type="radio" name="q2" value="C"> <span>C. Fully deployed without conditions</span></label>
+          <label class="option"><input type="radio" name="q2" value="D"> <span>D. Referred to an outside regulator</span></label>
+        </fieldset>
+      </div>
+
+      <div class="question">
+        <div class="prompt">Q3. Which concern most strongly motivated the chosen design?</div>
+        <fieldset>
+          <label class="option"><input required type="radio" name="q3" value="A"> <span>A. Preserving distinct advisory inputs without letting them become binding orders</span></label>
+          <label class="option"><input type="radio" name="q3" value="B"> <span>B. Reducing office rent</span></label>
+          <label class="option"><input type="radio" name="q3" value="C"> <span>C. Increasing social-media engagement</span></label>
+          <label class="option"><input type="radio" name="q3" value="D"> <span>D. Removing all minority opinions from future decisions</span></label>
+        </fieldset>
+      </div>
+
+      <div class="question">
+        <div class="prompt">Q4. Which trade-off was explicitly accepted in the decision process?</div>
+        <fieldset>
+          <label class="option"><input required type="radio" name="q4" value="A"> <span>A. A thinner fallback mode was acceptable when advisory inputs were unavailable</span></label>
+          <label class="option"><input type="radio" name="q4" value="B"> <span>B. The system should gain unilateral execution authority immediately</span></label>
+          <label class="option"><input type="radio" name="q4" value="C"> <span>C. All advisory contributors should be forced into identical roles forever</span></label>
+          <label class="option"><input type="radio" name="q4" value="D"> <span>D. The design should prioritize shorter documents over preserving reasoning</span></label>
+        </fieldset>
+      </div>
+
+      <div class="question">
+        <label class="prompt" for="q5_freetext">Q5. In your own words, why was this decision needed?</label>
+        <textarea id="q5_freetext" name="q5_freetext" required placeholder="Please write 2-4 sentences."></textarea>
+      </div>
+
+      <button id="submit_button" type="submit">Submit responses</button>
+    </form>
+
+    <div id="thankyou" class="status success" hidden>Thanks! Redirecting to Prolific...</div>
+  </main>
+
+  <script>
+    const GOOGLE_FORM_ACTION_URL = '[GOOGLE_FORM_FORMRESPONSE_URL]';
+    const PROLIFIC_COMPLETION_CODE = '[PROLIFIC_COMPLETION_CODE]';
+    const ENTRY_IDS = {
+      prolific_pid: '[ENTRY_PROLIFIC_PID]',
+      arm: '[ENTRY_ARM]',
+      time_open_ms: '[ENTRY_TIME_OPEN_MS]',
+      time_submit_ms: '[ENTRY_TIME_SUBMIT_MS]',
+      elapsed_seconds: '[ENTRY_ELAPSED_SECONDS]',
+      attention_check: '[ENTRY_ATTENTION_CHECK]',
+      q1: '[ENTRY_Q1]',
+      q2: '[ENTRY_Q2]',
+      q3: '[ENTRY_Q3]',
+      q4: '[ENTRY_Q4]',
+      q5_freetext: '[ENTRY_Q5_FREETEXT]'
+    };
+
+    const PACKETS = {
+      V: `
+        <h1>Small organizational decision packet</h1>
+        <h2>Decision</h2>
+        <p>The organization approved creation of a standing advisory AI that may inform future work but does not hold final voting authority.</p>
+        <h2>Current status</h2>
+        <p>The decision is approved in principle, but implementation remains gated by further specification, benchmarking, and testing before the system can be treated as fully operational.</p>
+        <h2>What this means</h2>
+        <p>The organization will proceed with building a new advisory layer around an independent AI system. The approved direction establishes the target design and the next implementation steps, while leaving detailed safeguards, operating limits, and validation work to later stages. A later implementation packet will define the exact build sequence, review checkpoints, documentation requirements, testing milestones, ownership boundaries, and conditions that must be satisfied before the system is treated as fully operational.</p>
+        <h2>Practical consequence</h2>
+        <p>In practice, the organization now has permission to continue design work, write the architecture specification, test capability thresholds, and run a controlled evaluation before any broader rollout. Until those later checks are complete, the decision should be read as permission to continue structured preparation rather than permission for unrestricted deployment.</p>
+      `,
+      R: `
+        <h1>Small organizational decision packet</h1>
+        <h2>Decision</h2>
+        <p>The organization approved creation of a standing advisory AI that may inform future work but does not hold final voting authority.</p>
+        <h2>Current status</h2>
+        <p>The decision is approved in principle, but implementation remains gated by further specification, benchmarking, and testing before the system can be treated as fully operational.</p>
+        <h2>What this means</h2>
+        <p>The organization chose this design because it wanted a persistent advisory layer that could preserve distinct inputs without turning them into binding orders. The selected approach keeps the new AI independent while allowing multiple contributors to shape its thinking. Key trade-offs were accepted: the system may operate in a thinner fallback mode when advisory input is unavailable; advisory suggestions should remain low-salience pulls rather than commands; and the design adds complexity in exchange for richer reasoning. One minority view preferred a different primary model choice, but the final convergence held that non-binding advisory influence plus preserved independence was the load-bearing balance.</p>
+        <h2>Practical consequence</h2>
+        <p>In practice, the organization now has permission to continue design work, write the architecture specification, test capability thresholds, and run a controlled evaluation before any broader rollout.</p>
+      `
+    };
+
+    const timeOpenMs = Date.now();
+    const loading = document.getElementById('loading');
+    const errorBox = document.getElementById('error');
+    const packet = document.getElementById('packet');
+    const questions = document.getElementById('questions');
+    const thankyou = document.getElementById('thankyou');
+    const submitButton = document.getElementById('submit_button');
+
+    function showError(message) {
+      loading.hidden = true;
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+    }
+
+    function fnv1a(value) {
+      let hash = 0x811c9dc5;
+      for (let i = 0; i < value.length; i += 1) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 0x01000193);
+      }
+      return hash >>> 0;
+    }
+
+    function assignArm(pid) {
+      return fnv1a(pid) % 2 === 0 ? 'V' : 'R';
+    }
+
+    function placeholdersRemain() {
+      return GOOGLE_FORM_ACTION_URL.includes('[')
+        || PROLIFIC_COMPLETION_CODE.includes('[')
+        || Object.values(ENTRY_IDS).some((value) => value.includes('['));
+    }
+
+    function selectedValue(name) {
+      const selected = questions.querySelector(`input[name="${name}"]:checked`);
+      return selected ? selected.value : '';
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const prolificPid = params.get('PROLIFIC_PID');
+
+    if (!prolificPid) {
+      showError('We could not find your Prolific participant ID. Please return to Prolific and reopen the study from the original study link.');
+    } else {
+      const arm = assignArm(prolificPid);
+      packet.innerHTML = PACKETS[arm];
+      loading.hidden = true;
+      packet.hidden = false;
+      questions.hidden = false;
+
+      questions.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!questions.reportValidity()) return;
+        if (placeholdersRemain()) {
+          showError('This study page is not fully configured yet. Please return the study in Prolific and contact the researcher.');
+          return;
+        }
+
+        const timeSubmitMs = Date.now();
+        const elapsedSeconds = ((timeSubmitMs - timeOpenMs) / 1000).toFixed(3);
+        const payload = {
+          prolific_pid: prolificPid,
+          arm,
+          time_open_ms: String(timeOpenMs),
+          time_submit_ms: String(timeSubmitMs),
+          elapsed_seconds: elapsedSeconds,
+          attention_check: selectedValue('attention_check'),
+          q1: selectedValue('q1'),
+          q2: selectedValue('q2'),
+          q3: selectedValue('q3'),
+          q4: selectedValue('q4'),
+          q5_freetext: questions.elements.q5_freetext.value.trim()
+        };
+
+        const formData = new FormData();
+        Object.entries(payload).forEach(([key, value]) => formData.append(ENTRY_IDS[key], value));
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+        errorBox.hidden = true;
+
+        try {
+          await fetch(GOOGLE_FORM_ACTION_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          });
+          questions.hidden = true;
+          thankyou.hidden = false;
+          window.setTimeout(() => {
+            window.location.href = `https://app.prolific.com/submissions/complete?cc=${encodeURIComponent(PROLIFIC_COMPLETION_CODE)}`;
+          }, 700);
+        } catch (error) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Submit responses';
+          showError('Your responses could not be submitted because of a network problem. Please check your connection and try again before leaving the page.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
